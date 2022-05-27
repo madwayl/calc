@@ -152,7 +152,7 @@ for (let button of Buttons) {
             entryScreen.textContent += e.target.value;
         }
 
-        if (!"+-x/".includes(entryScreen.textContent.slice(-1)) && e.target.value !== "=") {
+        if (!"+-x/(".includes(entryScreen.textContent.slice(-1)) && e.target.value !== "=") {
             resultScreen.textContent = operate(entryScreen.textContent)
         }
 
