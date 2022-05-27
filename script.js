@@ -5,6 +5,9 @@ let bracket = false,
     result = null,
     previousResult = null
 
+let oldTime,
+    newTime;
+
 const entryScreen = document.querySelector('div[data-section="entry"]');
 entryScreen.textContent = "";
 
@@ -110,10 +113,15 @@ for (let button of Buttons) {
         }
 
         else if (e.target.value === "B") {
-            resultScreen.classList.remove('error')
-            entryScreen.textContent = entryScreen.textContent.slice(0,-1);
-            // resultScreen.textContent = operate(entryScreen.textContent)
-            resultScreen.textContent = previousResult
+            if (newTime - oldTime > 1000) {
+                entryScreen.textContent = "";
+                console.log(newTime - oldTime)
+            } else {
+                resultScreen.classList.remove('error')
+                entryScreen.textContent = entryScreen.textContent.slice(0,-1);
+                // resultScreen.textContent = operate(entryScreen.textContent)
+                resultScreen.textContent = previousResult
+            }
         }
 
         else if (e.target.value === "()") {
@@ -158,5 +166,15 @@ for (let button of Buttons) {
 
         if (resultScreen.textContent !== 'Error')
             previousResult = resultScreen.textContent
-    })
+    });
 }
+
+// SECTION: Check on Long Press of Backspace
+let backspace = document.querySelector('input[value="B"]');
+backspace.addEventListener('mousedown', () =>  {
+    oldTime = new Date
+});
+backspace.addEventListener('mouseup', () =>  {
+    newTime = new Date
+});
+// !SECTION
