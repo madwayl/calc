@@ -52,11 +52,6 @@ input {
     font-size: large;
 }
 
-input[value = "0"] {
-    width: 130px;
-    border-radius: 500px;
-}
-
 div[data-section*="col"] {
     display: flex;
     flex-direction: column;
