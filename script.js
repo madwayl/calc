@@ -14,6 +14,8 @@ entryScreen.textContent = "";
 const resultScreen = document.querySelector('div[data-section="result"]');
 resultScreen.textContent = "";
 
+
+// SECTION: Calculator Operation
 // FIXME:
 // 1. Empty Values are allowed with .includes and considered true
 //      ✅ - Added another boolean statement to avoid the same
@@ -93,66 +95,133 @@ function operate(entry) {
                                     result.toExponential(6) :
                                     result
 }
+// !SECTION
+
+
+// SECTION: Event Actions 
+function eventAction(eventValue) {
+
+    if (eventValue === "C") {
+        entryScreen.textContent = "";
+        resultScreen.textContent = "";
+        bracket = false;
+        resultScreen.classList.remove('error')
+    }
+
+    else if (eventValue === "=") {
+        entryScreen.textContent = resultScreen.textContent;
+        resultScreen.textContent = "";
+        bracket = false;
+    }
+
+    else if (eventValue === "B") {
+        if (newTime - oldTime > 1000) {
+            entryScreen.textContent = "";
+            console.log(newTime - oldTime)
+        } else {
+            resultScreen.classList.remove('error')
+            entryScreen.textContent = entryScreen.textContent.slice(0,-1);
+            resultScreen.textContent = previousResult
+        }
+    }
+
+    else if (eventValue === "()") {
+        let islastValueNumber = '0123456789'.includes(entryScreen.textContent.slice(-1));
+        
+        if (!bracket && !islastValueNumber && br == 0) {
+            entryScreen.textContent += "(";
+            br++;
+            bracket = true;
+        } else if (bracket && islastValueNumber) {
+            entryScreen.textContent += ")";
+            br--;
+            bracket = false;
+        } else if (bracket && !islastValueNumber) {
+            entryScreen.textContent += "(";
+            br++;
+            if (br == 0) bracket = false;
+            else bracket = true;
+        }  else if (!bracket && islastValueNumber){
+            entryScreen.textContent += "(";
+            br++;
+            bracket = true;
+        } else {
+            entryScreen.textContent += ")";
+            br--;
+            bracket = false;
+        }
+
+        if (br == 0 && entryScreen.textContent.slice(-1) == ')') {
+            resultScreen.textContent = operate(entryScreen.textContent)
+        }
+    }
+}
+// !SECTION
 
 const Buttons = document.querySelectorAll('input');
 
 for (let button of Buttons) {
+    // SECTION: Mouse Press
     button.addEventListener('click',(e) => {
         
         if (e.target.value === "C") {
-            entryScreen.textContent = "";
-            resultScreen.textContent = "";
-            bracket = false;
-            resultScreen.classList.remove('error')
+            // entryScreen.textContent = "";
+            // resultScreen.textContent = "";
+            // bracket = false;
+            // resultScreen.classList.remove('error')
+            eventAction('C')
         }
 
         else if (e.target.value === "=") {
-            entryScreen.textContent = resultScreen.textContent;
-            resultScreen.textContent = "";
-            bracket = false;
+            // entryScreen.textContent = resultScreen.textContent;
+            // resultScreen.textContent = "";
+            // bracket = false;
+            eventAction('=')
         }
 
         else if (e.target.value === "B") {
-            if (newTime - oldTime > 1000) {
-                entryScreen.textContent = "";
-                console.log(newTime - oldTime)
-            } else {
-                resultScreen.classList.remove('error')
-                entryScreen.textContent = entryScreen.textContent.slice(0,-1);
-                // resultScreen.textContent = operate(entryScreen.textContent)
-                resultScreen.textContent = previousResult
-            }
+            // if (newTime - oldTime > 1000) {
+            //     entryScreen.textContent = "";
+            //     console.log(newTime - oldTime)
+            // } else {
+            //     resultScreen.classList.remove('error')
+            //     entryScreen.textContent = entryScreen.textContent.slice(0,-1);
+            //     // resultScreen.textContent = operate(entryScreen.textContent)
+            //     resultScreen.textContent = previousResult
+            // }
+            eventAction('B')
         }
 
         else if (e.target.value === "()") {
-            let islastValueNumber = '0123456789'.includes(entryScreen.textContent.slice(-1));
+            // let islastValueNumber = '0123456789'.includes(entryScreen.textContent.slice(-1));
             
-            if (!bracket && !islastValueNumber && br == 0) {
-                entryScreen.textContent += "(";
-                br++;
-                bracket = true;
-            } else if (bracket && islastValueNumber) {
-                entryScreen.textContent += ")";
-                br--;
-                bracket = false;
-            } else if (bracket && !islastValueNumber) {
-                entryScreen.textContent += "(";
-                br++;
-                if (br == 0) bracket = false;
-                else bracket = true;
-            }  else if (!bracket && islastValueNumber){
-                entryScreen.textContent += "(";
-                br++;
-                bracket = true;
-            } else {
-                entryScreen.textContent += ")";
-                br--;
-                bracket = false;
-            }
+            // if (!bracket && !islastValueNumber && br == 0) {
+            //     entryScreen.textContent += "(";
+            //     br++;
+            //     bracket = true;
+            // } else if (bracket && islastValueNumber) {
+            //     entryScreen.textContent += ")";
+            //     br--;
+            //     bracket = false;
+            // } else if (bracket && !islastValueNumber) {
+            //     entryScreen.textContent += "(";
+            //     br++;
+            //     if (br == 0) bracket = false;
+            //     else bracket = true;
+            // }  else if (!bracket && islastValueNumber){
+            //     entryScreen.textContent += "(";
+            //     br++;
+            //     bracket = true;
+            // } else {
+            //     entryScreen.textContent += ")";
+            //     br--;
+            //     bracket = false;
+            // }
 
-            if (br == 0 && entryScreen.textContent.slice(-1) == ')') {
-                resultScreen.textContent = operate(entryScreen.textContent)
-            }
+            // if (br == 0 && entryScreen.textContent.slice(-1) == ')') {
+            //     resultScreen.textContent = operate(entryScreen.textContent)
+            // }
+            eventAction('()')
         }
         
         else {
@@ -167,6 +236,21 @@ for (let button of Buttons) {
         if (resultScreen.textContent !== 'Error')
             previousResult = resultScreen.textContent
     });
+
+    document.addEventListener('keydown', (e) => {
+        console.log(e.key, e.code)
+
+        if (e.key === "Delete") {
+            eventAction('C')
+        }
+
+        else if (e.key === "=") {
+            entryScreen.textContent = resultScreen.textContent;
+            resultScreen.textContent = "";
+            bracket = false;
+        }
+    });
+
 }
 
 // SECTION: Check on Long Press of Backspace
