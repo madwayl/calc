@@ -172,10 +172,10 @@ function eventAction(eventValue) {
             if (entryScreen.textContent.slice(-1) == ')') bl--
             else if (entryScreen.textContent.slice(-1) == '(') bf--
 
-            entryScreen.textContent = entryScreen.textContent.slice(0,-1);
+            entryScreen.textContent = entryScreen.textContent.slice(0, -1);
             
             // Find Error Still exists on Backspace and return corrected value
-            if('+-x/'.includes(entryScreen.textContent.slice(-2,-1))) {
+            if('+-x/'.includes(entryScreen.textContent.slice(-2, -1))) {
                 if (entryScreen.textContent == '')
                     resultScreen.textContent = ""
                 else {
@@ -261,31 +261,35 @@ function checkError() {
 /* FIXME 🟢
 1. Hover action on KeyDown
 ✅ - Added Switch with Data Attributes
+2. Long Press Toggles ClassList Wrong
+✅ - Check using Ternary Operator for Keyup or Keydown
 */
-function hoverOnKeyPress(eventKey) {
+function hoverOnKeyPress(eventKey, eventType) {
 
-    const buttonSelect = document.querySelector(`input[data-value~="${eventKey}"`)
+    const btnActive = document.querySelector(`input[data-value~="${eventKey}"`);
+
+    const isKeyDown = eventType == "keydown";
     
     switch (eventKey) {
         case 'b':
         case 'Backspace':
-            buttonSelect.classList.toggle('backspace-active')
+            isKeyDown ? btnActive.classList.add('backspace-active') : btnActive.classList.remove('backspace-active')
 
         case 'c':
         case 'Delete':
-            buttonSelect.classList.toggle('delete-active')
+            isKeyDown ? btnActive.classList.add('delete-active') : btnActive.classList.remove('delete-active')
         
         case '=': case 'Enter':
         case '*': case 'x': case '/':
         case '%': case '(': case ')':
         case '-': case '+':
-            buttonSelect.classList.toggle('symbols-active')
+            isKeyDown ? btnActive.classList.add('symbols-active') : btnActive.classList.remove('symbols-active')
 
 
         case '1': case '2': case '3': case '4':
         case '5': case '6': case '7': case '8':
         case '9': case '0': case '.':
-            buttonSelect.classList.toggle('number-active')
+            isKeyDown ? btnActive.classList.add('number-active') : btnActive.classList.remove('number-active')
             
     }
 
@@ -317,7 +321,7 @@ document.addEventListener('keydown', (e) => {
     // Acknowledged Keys
 
     // Hover on Key
-    hoverOnKeyPress(e.key)
+    hoverOnKeyPress(e.key, e.type)
 
     if (e.key === "Delete" || e.key === "c") eventAction('C')
     else if (e.key === "=" || e.key === "Enter") eventAction('=')
@@ -336,7 +340,7 @@ document.addEventListener('keydown', (e) => {
 
 document.addEventListener('keyup', (e) => {
     
-    hoverOnKeyPress(e.key)
+    hoverOnKeyPress(e.key, e.type)
 });
 // !SECTION
 // !SECTION
