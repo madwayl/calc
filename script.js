@@ -11,10 +11,9 @@ entryScreen.textContent = "";
 const resultScreen = document.querySelector('div[data-section="result"]');
 resultScreen.textContent = "";
 
+// SECTION Calculator Operations
 
-// SECTION: Calculator Operations
-
-/* FIXME 🟢
+/* FIXME 🟠
 1. Empty Values are allowed with .includes and considered true
 ✅ - Added another boolean statement to avoid the same
 2. Issues with % symbols
@@ -25,6 +24,7 @@ resultScreen.textContent = "";
 ✅ - Used Function()
 5. Unhandled Error
 ✅ - Moved to try/catch block
+6. Add Spaces in between the symbols
 */
 
 function operate(entry) {
@@ -54,7 +54,7 @@ function operate(entry) {
                 last = entry.indexOf(')', first);
             }
 
-            // REVIEW: 
+            // REVIEW
             // - ✅ Learning `Function()' to use instead of eval()
             
             val = Function('return ' + entry.slice(first, last+1))();
@@ -79,9 +79,9 @@ function operate(entry) {
 
         result = Function('return ' + entry)();
 
-        /* FIXME 🟠
+        /* FIXME 🟢
         1. Max number of values only to be seen (Encounter by Font Size)
-        
+        ✅ - Fixed the Max Encounter to 10 Digits Length
         2. Issues with Larger Integer Values
         ✅ - Calculate Safe Integer avoid Number values
         */
@@ -89,16 +89,18 @@ function operate(entry) {
         // Check if a Decimal Value
         if (result % 1 === 0)
             // Check if SafeInteger
-            if (Number.isSafeInteger(result))
+            if (result.toString().length > 10) {
                 result = Number.parseInt(result)
-            // Make into Exponential Form of 10 length
+                result = result.toExponential(4)
+            }
             else
-                result = result.toExponential(10)
+                result = result
         // Check if Decimal
-        else if (result.toString().split('.')[1].length > 15)
-                result = result.toExponential(10)
-        else
-            result = result
+        else 
+            if (result.toString().split('.')[1].length > 5)
+                result = result.toExponential(4)
+            else
+                result = result
 
 
 
@@ -111,7 +113,7 @@ function operate(entry) {
 // !SECTION
 
 
-// SECTION: Event Actions
+// SECTION Event Actions
 
 /* FIXME 🟢
 1. Entering more than 1 symbol not encountering error
@@ -122,7 +124,7 @@ function operate(entry) {
     ✅ - Check for Double operator entry / operate if not
 2. Issues with unfinished brackets
 ✅ - Check exact entry and add end bracket
-3. Avoid 
+3. Issue on Equals after Exponents
 */
 
 function eventAction(eventValue) {
@@ -138,7 +140,13 @@ function eventAction(eventValue) {
     // On Equals
     else if (eventValue === "=") {
         
-        entryScreen.textContent = resultScreen.textContent;
+        if (resultScreen.textContent.includes('e+'))
+            entryScreen.textContent = Number(resultScreen.textContent).toString()
+        else if (resultScreen.textContent.includes('e-'))
+            entryScreen.textContent = (Number(resultScreen.textContent)).toFixed(resultScreen.textContent.length - 1).toString()
+        else
+            entryScreen.textContent = resultScreen.textContent;
+        
         resultScreen.textContent = "";
         bl = 0; bf = 0;
         bracket = false;
@@ -159,7 +167,6 @@ function eventAction(eventValue) {
         } 
         // Short Press Backspace
         else {
-            resultScreen.classList.remove('error')
 
             // Reduce Bracket Count after Backspace
             if (entryScreen.textContent.slice(-1) == ')') bl--
@@ -172,7 +179,6 @@ function eventAction(eventValue) {
                 if (entryScreen.textContent == '')
                     resultScreen.textContent = ""
                 else {
-                    resultScreen.classList.add('error')
                     resultScreen.textContent = "ERROR"
                 }
             }
@@ -185,7 +191,7 @@ function eventAction(eventValue) {
 
     // On Brackets by Mouse Click
     
-    /*FIXME 🟢
+    /* FIXME 🟢
     Fixing the Bracket errors showing up
     - ((8)9) ✅
     - ((9)-(9)) ✅
@@ -241,7 +247,7 @@ function eventAction(eventValue) {
 
     }
 
-    // Always Scroll to Left
+    // Always Scroll Entry to Left
     entryScreen.scrollLeft = entryScreen.scrollWidth - entryScreen.clientHeight
 }
 // !SECTION
@@ -252,10 +258,45 @@ function checkError() {
     else resultScreen.classList.remove('error')
 }
 
+/* FIXME ⚪
+1. Hover action on KeyDown
+*/
+function hoverOnKeyPress(eventKey) {
+
+    const b = Array(document.querySelectorAll('input'))
+
+        b.dataset.value
+    
+        switch (eventKey) {
+            case 'b':
+            case 'Backspace':
+                .classList.add('backspace-active')
+
+            case 'c':
+            case 'Delete':
+                .classList.add('delete-active')
+            
+            case '=':
+            case 'Enter':
+                .classList.add('symbols-active')
+
+            case '*':
+            case 'x':
+
+            case '1': case '2': case '3': case '4':
+            case '5': case '6': case '7': case '8':
+            case '9': case '0': case '.':
+                .classList.add('number-active')
+                
+        }
+
+    });
+}
+
 const Buttons = document.querySelectorAll('input');
 
-// SECTION: Event Listeners 
-// SECTION: Mouse
+// SECTION Event Listeners 
+// SECTION Mouse
 for (let button of Buttons) {
     button.addEventListener('click',(e) => {
         eventAction(e.target.value);
@@ -265,21 +306,21 @@ for (let button of Buttons) {
 }
 // !SECTION
 
-// SECTION: Keyboard 
-document.addEventListener('keyup', (e) => {
+// SECTION Keyboard 
+document.addEventListener('keydown', (e) => {
     // console.log(e.key, e.code);
 
     // Ignored Keys
-    if ('abcdefghijklmnopqrstuvwxyz&^$#`~!@_{[]}:;"\'\\<,>?'.includes(e.key)) {
+    if ('adefghijklmnopqrstuvwyz&^$#`~!@_{[]}:;"\'\\<,>?'.includes(e.key)) {
         // console.log('Key Ignored: ', e.key)
         return
     }
 
     // Acknowledged Keys
-    if (e.key === "Delete") eventAction('C')
-    else if (e.key === "=") eventAction('=')
-    else if (e.key === "Backspace") eventAction('B')
-    else if (e.key === "*") eventAction('x')
+    if (e.key === "Delete" || e.key === "c") eventAction('C')
+    else if (e.key === "=" || e.key === "Enter") eventAction('=')
+    else if (e.key === "Backspace" || e.key === "b") eventAction('B')
+    else if (e.key === "*" || e.key === "x") eventAction('x')
     else if ('1234567890-+=%()./'.includes(e.key)) {
         // console.log('Key Acknowledged: ', e.key)
         eventAction(e.key)
@@ -294,7 +335,7 @@ document.addEventListener('keyup', (e) => {
 // !SECTION
 
 
-// SECTION: Long Press of Backspace
+// SECTION Long Press of Backspace
 let backspace = document.querySelector('input[value="B"]');
 backspace.addEventListener('mousedown', () =>  {
     oldTime = new Date

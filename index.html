@@ -6,13 +6,13 @@
     <title>Calculator</title>
 </head>
 <body>
-
+    
     <div data-section="calculator">
         <div data-section="body">
             <!-- SECTION: Calculator Screen -->
             <div data-section="screen">
-                <div data-section="entry"></div>
                 <div data-section="result"></div>
+                <div data-section="entry"></div>
             </div>
             <!-- !SECTION -->
             
@@ -22,29 +22,29 @@
                 <!-- SECTION: Numbers and Decimals -->
                 <div data-section="col1">
                     <div data-section="row1">
-                        <input type="button" value="C">
-                        <input type="button" value="()">
-                        <input type="button" value="%">
+                        <input class="delete" type="button" value="C" data-value="c Delete">
+                        <input class="symbol" type="button" value="()" data-value="( )">
+                        <input class="symbol" type="button" value="%" data-value="%">
                     </div>
                     <div data-section="row2">
-                        <input type="button" value="7">
-                        <input type="button" value="8">
-                        <input type="button" value="9">        
+                        <input class="number" type="button" value="7" data-value="7">
+                        <input class="number" type="button" value="8" data-value="8">
+                        <input class="number" type="button" value="9" data-value="9">        
                     </div>
                     <div data-section="row3">
-                        <input type="button" value="4">
-                        <input type="button" value="5">
-                        <input type="button" value="6">    
+                        <input class="number" type="button" value="4" data-value="4">
+                        <input class="number" type="button" value="5" data-value="5">
+                        <input class="number" type="button" value="6" data-value="6">    
                     </div>
                     <div data-section="row4">
-                        <input type="button" value="1">
-                        <input type="button" value="2">
-                        <input type="button" value="3">
+                        <input class="number" type="button" value="1" data-value="1">
+                        <input class="number" type="button" value="2" data-value="2">
+                        <input class="number" type="button" value="3" data-value="3">
                     </div>
                     <div data-section="row5">
-                        <input type="button" value="0">
-                        <input type="button" value=".">
-                        <input type="button" value="B">
+                        <input class="number" type="button" value="0" data-value="0">
+                        <input class="number" type="button" value="." data-value=".">
+                        <input class="backspace" type="button" value="B" data-value="b Backspace">
                     </div>
                 </div>
                 <!-- !SECTION -->
@@ -52,11 +52,11 @@
                 <!-- SECTION: Symbols -->
                 <div data-section="col2">
                     <div data-section="symbols">
-                        <input type="button" value="/">
-                        <input type="button" value="x">
-                        <input type="button" value="-">
-                        <input type="button" value="+">
-                        <input type="button" value="=">
+                        <input class="symbol" type="button" value="/" data-value="/">
+                        <input class="symbol" type="button" value="x" data-value="* x">
+                        <input class="symbol" type="button" value="-" data-value="-">
+                        <input class="symbol" type="button" value="+" data-value="+">
+                        <input class="symbol" type="button" value="=" data-value="=">
                     </div>
                 </div> 
                 <!-- !SECTION -->
