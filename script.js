@@ -1,7 +1,7 @@
 
 let bracket = false,
     equalized = false,
-    br = 0, 
+    br = 0, bf = 0, bl = 0, 
     result = null,
     previousResult = null
 
@@ -49,12 +49,15 @@ function operate(entry) {
         check: while (first !== -1) {
             
             first = entry.lastIndexOf('(')
-            last = entry.indexOf(')')
+            last = entry.indexOf(')', first)
+
             
             if (first !== -1 && last === -1) {
                 entry += ')'; 
-                last = entry.indexOf(')');
+                last = entry.indexOf(')', first);
             }
+
+            /* REVIEW: Learning `Function()' to use instead of eval() */
             
             val = Function('return ' + entry.slice(first, last+1))();
             
@@ -86,9 +89,6 @@ function operate(entry) {
         return 'Error'
     }
     
-    // if ('x/%'.includes(result)) resultScreen.classList.add('error')
-    // else resultScreen.classList.remvoe('error')
-
     // FIXME: Max number of value to be seen
     return result % 1 === 0 ? Number.parseInt(result) :
                     result.toString().split('.')[1].length > 10 ?
@@ -105,56 +105,79 @@ function eventAction(eventValue) {
         entryScreen.textContent = "";
         resultScreen.textContent = "";
         bracket = false;
+        br = 0; bl = 0; bf = 0;
         resultScreen.classList.remove('error')
     }
 
     else if (eventValue === "=") {
         entryScreen.textContent = resultScreen.textContent;
         resultScreen.textContent = "";
+        br = 0; bl = 0; bf = 0;
         bracket = false;
     }
 
     else if (eventValue === "B") {
         if (newTime - oldTime > 1000) {
             entryScreen.textContent = "";
+            br = 0; bl = 0; bf = 0;
             console.log(newTime - oldTime)
         } else {
             resultScreen.classList.remove('error')
             entryScreen.textContent = entryScreen.textContent.slice(0,-1);
             resultScreen.textContent = previousResult
+            
+            if (entryScreen.textContent.slice(-1) == ')') br++
+            else if (entryScreen.textContent.slice(-1) == '(') br--
+
         }
     }
 
+
+    /*FIXME:
+    Fixing the Bracket errors showing up
+    - ((8)9) ✅
+    - ((9)-(9)) ✅
+    */
     else if (eventValue === "()") {
         let islastValueNumber = '0123456789'.includes(entryScreen.textContent.slice(-1));
-        
-        if (!bracket && !islastValueNumber && br == 0) {
+        let islastValueBracket = ')' === entryScreen.textContent.slice(-1)
+
+        if (bf - bl == 0) {
             entryScreen.textContent += "(";
-            br++;
-            bracket = true;
-        } else if (bracket && islastValueNumber) {
+            bf++
+        } else if (bf > bl && (islastValueNumber || islastValueBracket)) {
             entryScreen.textContent += ")";
-            br--;
-            bracket = false;
-        } else if (bracket && !islastValueNumber) {
+            bl++
+        } else if (bf > bl && !islastValueNumber) {
             entryScreen.textContent += "(";
-            br++;
-            if (br == 0) bracket = false;
-            else bracket = true;
-        }  else if (!bracket && islastValueNumber){
-            entryScreen.textContent += "(";
-            br++;
-            bracket = true;
-        } else {
-            entryScreen.textContent += ")";
-            br--;
-            bracket = false;
+            bf++
         }
 
         if (br == 0 && entryScreen.textContent.slice(-1) == ')') {
             resultScreen.textContent = operate(entryScreen.textContent)
         }
     }
+
+    else if (eventValue === '(' || eventValue === ')') {
+        let kbf = entryScreen.textContent.split('(').length - 1
+        let kbl = entryScreen.textContent.split(')').length - 1
+        
+        entryScreen.textContent += eventValue;
+        
+        if (!(kbf >= kbl)) return 'Error'
+    }
+
+    else {
+        if ("+-x/".includes(entryScreen.textContent.slice(-1))) resultScreen.textContent = 'Error'
+        entryScreen.textContent += eventValue;
+    }
+
+    if (!"+-x/(".includes(entryScreen.textContent.slice(-1)) && eventValue !== "=") {
+        resultScreen.textContent = operate(entryScreen.textContent)
+    }
+
+    if (resultScreen.textContent !== 'Error')
+        previousResult = resultScreen.textContent
 }
 // !SECTION
 
@@ -163,95 +186,29 @@ const Buttons = document.querySelectorAll('input');
 for (let button of Buttons) {
     // SECTION: Mouse Press
     button.addEventListener('click',(e) => {
-        
-        if (e.target.value === "C") {
-            // entryScreen.textContent = "";
-            // resultScreen.textContent = "";
-            // bracket = false;
-            // resultScreen.classList.remove('error')
-            eventAction('C')
-        }
-
-        else if (e.target.value === "=") {
-            // entryScreen.textContent = resultScreen.textContent;
-            // resultScreen.textContent = "";
-            // bracket = false;
-            eventAction('=')
-        }
-
-        else if (e.target.value === "B") {
-            // if (newTime - oldTime > 1000) {
-            //     entryScreen.textContent = "";
-            //     console.log(newTime - oldTime)
-            // } else {
-            //     resultScreen.classList.remove('error')
-            //     entryScreen.textContent = entryScreen.textContent.slice(0,-1);
-            //     // resultScreen.textContent = operate(entryScreen.textContent)
-            //     resultScreen.textContent = previousResult
-            // }
-            eventAction('B')
-        }
-
-        else if (e.target.value === "()") {
-            // let islastValueNumber = '0123456789'.includes(entryScreen.textContent.slice(-1));
-            
-            // if (!bracket && !islastValueNumber && br == 0) {
-            //     entryScreen.textContent += "(";
-            //     br++;
-            //     bracket = true;
-            // } else if (bracket && islastValueNumber) {
-            //     entryScreen.textContent += ")";
-            //     br--;
-            //     bracket = false;
-            // } else if (bracket && !islastValueNumber) {
-            //     entryScreen.textContent += "(";
-            //     br++;
-            //     if (br == 0) bracket = false;
-            //     else bracket = true;
-            // }  else if (!bracket && islastValueNumber){
-            //     entryScreen.textContent += "(";
-            //     br++;
-            //     bracket = true;
-            // } else {
-            //     entryScreen.textContent += ")";
-            //     br--;
-            //     bracket = false;
-            // }
-
-            // if (br == 0 && entryScreen.textContent.slice(-1) == ')') {
-            //     resultScreen.textContent = operate(entryScreen.textContent)
-            // }
-            eventAction('()')
-        }
-        
-        else {
-            if ("+-x/".includes(entryScreen.textContent.slice(-1))) resultScreen.textContent = 'Error'
-            entryScreen.textContent += e.target.value;
-        }
-
-        if (!"+-x/(".includes(entryScreen.textContent.slice(-1)) && e.target.value !== "=") {
-            resultScreen.textContent = operate(entryScreen.textContent)
-        }
-
-        if (resultScreen.textContent !== 'Error')
-            previousResult = resultScreen.textContent
+        eventAction(e.target.value)
     });
-
-    document.addEventListener('keydown', (e) => {
-        console.log(e.key, e.code)
-
-        if (e.key === "Delete") {
-            eventAction('C')
-        }
-
-        else if (e.key === "=") {
-            entryScreen.textContent = resultScreen.textContent;
-            resultScreen.textContent = "";
-            bracket = false;
-        }
-    });
-
 }
+
+document.addEventListener('keyup', (e) => {
+    console.log(e.key, e.code);
+
+    if (e.repeat) return
+
+    if ('abcdefghijklmnopqrstuvwxyz&^$#`~!@_{[]}:;"\'\\<,>?'.includes(e.key)) {
+        // console.log('Key Ignored: ', e.key)
+    }
+
+    if (e.key === "Delete") eventAction('C')
+    else if (e.key === "=") eventAction('=')
+    else if (e.key === "Backspace") eventAction('B')
+    else if (e.key === "*") eventAction('x')
+    else if ('1234567890-+=%()./'.includes(e.key)) {
+        // console.log('Key Acknowledged: ', e.key)
+        eventAction(e.key)
+    } else {}
+});
+
 
 // SECTION: Check on Long Press of Backspace
 let backspace = document.querySelector('input[value="B"]');
