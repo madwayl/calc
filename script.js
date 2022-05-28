@@ -258,39 +258,37 @@ function checkError() {
     else resultScreen.classList.remove('error')
 }
 
-/* FIXME ⚪
+/* FIXME 🟢
 1. Hover action on KeyDown
+✅ - Added Switch with Data Attributes
 */
 function hoverOnKeyPress(eventKey) {
 
-    const b = Array(document.querySelectorAll('input'))
-
-        b.dataset.value
+    const buttonSelect = document.querySelector(`input[data-value~="${eventKey}"`)
     
-        switch (eventKey) {
-            case 'b':
-            case 'Backspace':
-                .classList.add('backspace-active')
+    switch (eventKey) {
+        case 'b':
+        case 'Backspace':
+            buttonSelect.classList.toggle('backspace-active')
 
-            case 'c':
-            case 'Delete':
-                .classList.add('delete-active')
+        case 'c':
+        case 'Delete':
+            buttonSelect.classList.toggle('delete-active')
+        
+        case '=': case 'Enter':
+        case '*': case 'x': case '/':
+        case '%': case '(': case ')':
+        case '-': case '+':
+            buttonSelect.classList.toggle('symbols-active')
+
+
+        case '1': case '2': case '3': case '4':
+        case '5': case '6': case '7': case '8':
+        case '9': case '0': case '.':
+            buttonSelect.classList.toggle('number-active')
             
-            case '=':
-            case 'Enter':
-                .classList.add('symbols-active')
+    }
 
-            case '*':
-            case 'x':
-
-            case '1': case '2': case '3': case '4':
-            case '5': case '6': case '7': case '8':
-            case '9': case '0': case '.':
-                .classList.add('number-active')
-                
-        }
-
-    });
 }
 
 const Buttons = document.querySelectorAll('input');
@@ -317,6 +315,10 @@ document.addEventListener('keydown', (e) => {
     }
 
     // Acknowledged Keys
+
+    // Hover on Key
+    hoverOnKeyPress(e.key)
+
     if (e.key === "Delete" || e.key === "c") eventAction('C')
     else if (e.key === "=" || e.key === "Enter") eventAction('=')
     else if (e.key === "Backspace" || e.key === "b") eventAction('B')
@@ -330,6 +332,11 @@ document.addEventListener('keydown', (e) => {
 
     checkError()
 
+});
+
+document.addEventListener('keyup', (e) => {
+    
+    hoverOnKeyPress(e.key)
 });
 // !SECTION
 // !SECTION
