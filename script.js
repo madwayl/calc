@@ -1,9 +1,8 @@
 
 let bf = 0, bl = 0, // Brackets Front + Brackets Last
-    result = null,
-    previousResult = null
+    result = null  // Result of the entry value
 
-let oldTime,
+let oldTime, // Calculate Time for Long Press on Backspace
     newTime;
 
 const entryScreen = document.querySelector('div[data-section="entry"]');
@@ -80,8 +79,9 @@ function operate(entry) {
 
         result = Function('return ' + entry)();
 
-        /* FIXME 🔴
+        /* FIXME 🟠
         1. Max number of values only to be seen (Encounter by Font Size)
+        
         2. Issues with Larger Integer Values
         ✅ - Calculate Safe Integer avoid Number values
         */
@@ -103,7 +103,6 @@ function operate(entry) {
 
 
     } catch (e) {
-        resultScreen.classList.add('error')
         return 'ERROR'
     }
 
@@ -112,7 +111,7 @@ function operate(entry) {
 // !SECTION
 
 
-// SECTION: Event Actions to Perform on Event
+// SECTION: Event Actions
 
 /* FIXME 🟢
 1. Entering more than 1 symbol not encountering error
@@ -134,7 +133,6 @@ function eventAction(eventValue) {
         resultScreen.textContent = "";
         bracket = false;
         bl = 0; bf = 0;
-        resultScreen.classList.remove('error')
     }
 
     // On Equals
@@ -146,7 +144,8 @@ function eventAction(eventValue) {
         bracket = false;
         
         // Do not acknowledge Error on Equal
-        if (resultScreen.textContent = "ERROR") entryScreen.textContent = ""
+        if (resultScreen.textContent == "ERROR") entryScreen.textContent = ""
+
     }
 
     // On Backspace
@@ -172,13 +171,14 @@ function eventAction(eventValue) {
             if('+-x/'.includes(entryScreen.textContent.slice(-2,-1))) {
                 if (entryScreen.textContent == '')
                     resultScreen.textContent = ""
-                else
+                else {
+                    resultScreen.classList.add('error')
                     resultScreen.textContent = "ERROR"
+                }
             }
             else if (!'+-x/'.includes(entryScreen.textContent.slice(-2,-1)))
                 resultScreen.textContent = operate(entryScreen.textContent.slice(0,-1))
             else
-                // resultScreen.textContent = previousResult
                 return
         }
     }
@@ -218,7 +218,9 @@ function eventAction(eventValue) {
         
         entryScreen.textContent += eventValue;
         
-        if (!(kbf >= kbl)) return 'ERROR'
+        if (!(kbf >= kbl)) {
+            return 'ERROR'
+        }
     }
     
     // On Other Entries
@@ -228,24 +230,27 @@ function eventAction(eventValue) {
         let beforeLastChar = entryScreen.textContent.slice(-2, -1)
         
         // Return Error on double operator entry
-        if ("+-x/".includes(beforeLastChar) && beforeLastChar != '') 
+        if ("+-x/".includes(beforeLastChar) && beforeLastChar != '') {
             resultScreen.textContent = 'ERROR'
+        } 
     }
 
     // Allow to operate only if no symbols are typed
     if (!"+-x/(".includes(entryScreen.textContent.slice(-1)) && eventValue !== "=") {
         resultScreen.textContent = operate(entryScreen.textContent)
-    }
 
-    // Store Previous Result if no Error Encountered (All Time)
-    // if (resultScreen.textContent !== 'ERROR')
-    //     previousResult = resultScreen.textContent
+    }
 
     // Always Scroll to Left
     entryScreen.scrollLeft = entryScreen.scrollWidth - entryScreen.clientHeight
 }
 // !SECTION
 
+// Check on Error & Enable Error Class
+function checkError() {
+    if (resultScreen.textContent == 'ERROR') resultScreen.classList.add('error')
+    else resultScreen.classList.remove('error')
+}
 
 const Buttons = document.querySelectorAll('input');
 
@@ -253,7 +258,9 @@ const Buttons = document.querySelectorAll('input');
 // SECTION: Mouse
 for (let button of Buttons) {
     button.addEventListener('click',(e) => {
-        eventAction(e.target.value)
+        eventAction(e.target.value);
+        
+        checkError()
     });
 }
 // !SECTION
@@ -279,6 +286,9 @@ document.addEventListener('keyup', (e) => {
     } else {
         return
     }
+
+    checkError()
+
 });
 // !SECTION
 // !SECTION
