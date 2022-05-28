@@ -30,9 +30,19 @@ div[data-section="screen"]{
     margin-bottom: 15px;
 }
 
+/* ENTER */
 div[data-section="entry"]{
     height: 90px;
+    overflow:scroll;
+    overflow-y: hidden;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
+div[data-section="entry"]::-webkit-scrollbar {
+    display: none; /* Chrome */
+}
+
+/* RESULT */
 div[data-section="result"]{
     height: 50px;
 }
