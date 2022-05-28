@@ -113,7 +113,7 @@ input {
     font-family: 'Spline Sans Mono', monospace;
     font-weight: 600;
     border: 0;
-    color: #1d3557;
+    color: #23416C;
     background-color: #ffeccc;
 }
 
@@ -123,12 +123,12 @@ input:active {
 
 /* SECTION: Numbers */
 .number:hover {
-    color: #060631;
+    color: #14253E;
     background-color: #FFDA99;
 }
 
 .number-active {
-    color: #060631;
+    color: #14253E;
     background-color: #FFDA99;
     border-radius: 30%;
 }
@@ -141,12 +141,12 @@ input:active {
 
 .symbol:hover {
     background-color: #FB8F23;
-    color: #060631;
+    color: #14253E;
 }
 
 .symbol-active{
     background-color: #FB8F23;
-    color: #060631;
+    color: #14253E;
     border-radius: 30%;
 }
 /* !SECTION */
@@ -158,29 +158,29 @@ input:active {
 
 .delete:hover {
     background-color: #DA1B2B;
-    color: #060631;
+    color: #14253E;
 }
 
 .delete-active {
     background-color: #DA1B2B;
-    color: #060631;
+    color: #14253E;
     border-radius: 30%;
 }
 /* !SECTION */
 
 /* SECTION: Backspace */
 .backspace{
-    background-color: #6D7E9C;
+    background-color: #D37D4A;
 }
 
 .backspace:hover {
-    background-color: #5B6A86;
-    color: #060631;
+    background-color: #C56630;
+    color: #14253E;
 }
 
 .backspace-active {
-    background-color: #4F5D75;
-    color: #060631;
+    background-color: #C56630;
+    color: #14253E;
     border-radius: 30%;
 }
 /* !SECTION */
