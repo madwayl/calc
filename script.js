@@ -309,10 +309,10 @@ function eventAction(eventValue) {
         LastChar = entryScreen.textContent.replaceAll(' ', '').slice(-1);
         
         const beforeLastChar = entryScreen.textContent.replaceAll(' ', '').slice(-2, -1);
-        const br_md = beforeLastChar == '(' && 'x/'.includes(LastChar); //Multiply and Division not Allowed after Bracket
+        // const br_md = beforeLastChar == '(' && 'x/'.includes(LastChar); //Multiply and Division not Allowed after Bracket
         
         // Return Error on double operator entry
-        if (("+-x/".includes(beforeLastChar) && "+-x/".includes(LastChar) && beforeLastChar != '' && LastChar != '') || br_md && !al_pm) {
+        if (("+-x/(".includes(beforeLastChar) && "+-x/".includes(LastChar) && beforeLastChar != '' && LastChar != '') && !al_pm) {
             resultScreen.textContent = 'ERROR';
         } 
     }
