@@ -128,10 +128,10 @@ function operate(entry) {
                 result = result
         // If Decimal
         else 
-            if (result.toString().split('.')[1].length > 5) {
+            if (result.toString().split('.')[1].length > 4) {
                 
                 // Check if repeating Decimal
-                let count = result.toString().split(`${result.toString().slice(-3,-2)}`).length - 1
+                let count = result.toString().split(`${result.toString().slice(-3, -2)}`).length - 1
                 if (count > 5)
                     result = result.toFixed(2)
                 
@@ -152,7 +152,7 @@ function operate(entry) {
 
 // SECTION Event Actions
 
-/* FIXME 🟠
+/* FIXME 🟢
     1. Entering more than 1 symbol not encountering error
         ✅ - Entered Statement to disallow more than 1 operator together
             a. Reversing from the Error
@@ -175,7 +175,8 @@ function operate(entry) {
     7. Show error on - 1(x 
         ✅ - Separate Check for Bracket & '+/' added
     8. Not joining Mouse and Keyboard Click for Brackets
-        
+        ✅ - Remove separate keyboard based bracket calculation
+                and integrate with Mouse based bracket calculation
 */
 
 function eventAction(eventValue) {
@@ -278,16 +279,17 @@ function eventAction(eventValue) {
     }
 
     // On Keyboard Specific Brackets
-    else if (eventValue === '(' || eventValue === ')') {
-        let kbf = entryScreen.textContent.split('(').length - 1
-        let kbl = entryScreen.textContent.split(')').length - 1
-        
+    else if (eventValue === '(') {
+        bf++;
         entryScreen.textContent += eventValue;
-        
-        if (!(kbf >= kbl)) {
-            return 'ERROR';
-        }
     }
+
+    else if (eventValue === ')') {
+        bl++;
+        entryScreen.textContent += eventValue;
+
+        if (!(bf >= bl)) return 'ERROR';
+    }   
     
     // On Other Entries
     else {
