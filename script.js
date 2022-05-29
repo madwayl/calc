@@ -14,22 +14,22 @@ resultScreen.textContent = "";
 // SECTION Calculator Operations
 
 /* FIXME 🟢
-1. Empty Values are allowed with .includes and considered true
-✅ - Added another boolean statement to avoid the same
-2. Issues with % symbols
-✅ - Created a separate while loop for checking %
-3. Issues with brackets based multiplication
-✅ - Made flow to add multiplication after bracket calculation
-4. Avoid eval()
-✅ - Used Function()
-5. Unhandled Error
-✅ - Moved to try/catch block
-6. Fix Exponentials with Small Decimals
-✅ - Check Length of repeating value
-7. Issue with -(-3) Calculation
-✅ - Fixed with Check on -1 and +1 with calculation and make calculation
-8. Fix Bugs on : 3-(-3)+(3-(-3) | 3-(-3)4 | 3 + (+3)4
-✅ - Fixed with changes on final result string calculation
+    1. Empty Values are allowed with .includes and considered true
+        ✅ - Added another boolean statement to avoid the same
+    2. Issues with % symbols
+        ✅ - Created a separate while loop for checking %
+    3. Issues with brackets based multiplication
+        ✅ - Made flow to add multiplication after bracket calculation
+    4. Avoid eval()
+        ✅ - Used Function()
+    5. Unhandled Error
+        ✅ - Moved to try/catch block
+    6. Fix Exponentials with Small Decimals
+        ✅ - Check Length of repeating value
+    7. Issue with -(-3) Operate Calculation
+        ✅ - Fixed with Check on -1 and +1 with calculation and make calculation
+    8. Fix Bugs on : 3-(-3)+(3-(-3) | 3-(-3)4 | 3 + (+3)4
+        ✅ - Fixed with changes on final result string calculation
 */
 
 function operate(entry) {
@@ -109,12 +109,12 @@ function operate(entry) {
         result = Function('return ' + entry)();
 
         /* FIXME 🟢
-        1. Max number of values only to be seen (Encounter by Font Size)
-        ✅ - Fixed the Max Encounter to 10 Digits Length
-        2. Issues with Larger Integer Values
-        ✅ - Calculate Safe Integer avoid Number values
-        3. Short Decimals to Exponential
-        ✅ - Check for repeated decimal values
+            1. Max number of values only to be seen (Encounter by Font Size)
+                ✅ - Fixed the Max Encounter to 10 Digits Length
+            2. Issues with Larger Integer Values
+                ✅ - Calculate Safe Integer avoid Number values
+            3. Short Decimals to Exponential
+                ✅ - Check for repeated decimal values
         */
 
         // Check if a Decimal Number or Whole Number
@@ -128,13 +128,14 @@ function operate(entry) {
                 result = result
         // If Decimal
         else 
-            if (result.toString().split('.')[1].length > 4) {
+            if (result.toString().length > 4) {
                 
                 // Check if repeating Decimal
-                let count = result.toString().split(`${result.toString().slice(-3, -2)}`).length - 1
+                decimal = result.toString().split('.')[1]
+                count = decimal.split(`${decimal.slice(-3, -2)}`).length - 1
+                
                 if (count > 5)
                     result = result.toFixed(2)
-                
                 else
                     result = result.toExponential(4)
             }
@@ -253,9 +254,9 @@ function eventAction(eventValue) {
     // On Brackets by Mouse Click
     
     /* FIXME 🟢
-    Fixing the Bracket errors showing up
-    - ((8)9) ✅
-    - ((9)-(9)) ✅
+    Fixing the Bracket errors (incorrect Bracket Sequence) showing up
+        - ((8)9) ✅
+        - ((9)-(9)) ✅
     */
     
     else if (eventValue === "()") {
