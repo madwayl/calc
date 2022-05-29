@@ -13,7 +13,7 @@ resultScreen.textContent = "";
 
 // SECTION Calculator Operations
 
-/* FIXME 🟠
+/* FIXME 🟢
 1. Empty Values are allowed with .includes and considered true
 ✅ - Added another boolean statement to avoid the same
 2. Issues with % symbols
@@ -29,7 +29,7 @@ resultScreen.textContent = "";
 7. Issue with -(-3) Calculation
 ✅ - Fixed with Check on -1 and +1 with calculation and make calculation
 8. Fix Bugs on : 3-(-3)+(3-(-3) | 3-(-3)4 | 3 + (+3)4
-✅ - Fixed with changes on `val` calculation
+✅ - Fixed with changes on final result string calculation
 */
 
 function operate(entry) {
@@ -82,22 +82,26 @@ function operate(entry) {
                             entry = entry.slice(0, beforeIndex - 1)  + `+${-1 * val}*` + entry.slice(afterIndex+1);
                         else if (beforeChar == '+')
                             entry = entry.slice(0, beforeIndex - 1)  + `${val}*` + entry.slice(afterIndex+1);
+                        else
+                            entry = entry.slice(0, beforeIndex)  + `${val}*` + entry.slice(afterIndex+1);
                     } else
                         entry = entry.slice(0, beforeIndex)  + `${val}*` + entry.slice(afterIndex+1);
                 } else if (beforeIsNumber) {
                     entry = entry.slice(0, beforeIndex)  + `*${val}` + entry.slice(afterIndex+1);
                 } else {
                     if (beforeChar == '-') {
-                        if (!beforeIsNumber && val < 0)
-                            if (afterIsNumber)
+                        if (!beforeIsNumber && val < 0) {
+                            if (afterIsNumber) {
                                 entry = entry.slice(0, beforeIndex - 1)  + `+${-1 * val}*` + entry.slice(afterIndex+1);
-                            else
+                            } else {
                                 entry = entry.slice(0, beforeIndex - 1)  + `+${-1 * val}` + entry.slice(afterIndex+1);
-                    }
-                    // else if (beforeChar == '+')
-                    //     entry = entry.slice(0, beforeIndex)  + `${val}` + entry.slice(afterIndex+1);
-                    else
+                            }
+                        } else {
+                            entry = entry.slice(0, beforeIndex)  + `${val}` + entry.slice(afterIndex+1);
+                        }
+                    } else {
                         entry = entry.slice(0, beforeIndex)  + `${val}` + entry.slice(afterIndex+1);
+                    }
                 }
             }
         }
@@ -148,7 +152,7 @@ function operate(entry) {
 
 // SECTION Event Actions
 
-/* FIXME 🟢
+/* FIXME 🟠
     1. Entering more than 1 symbol not encountering error
         ✅ - Entered Statement to disallow more than 1 operator together
             a. Reversing from the Error
@@ -170,6 +174,8 @@ function operate(entry) {
             ✅ - Ignore Spacing when LastChar is '/*(' and ''
     7. Show error on - 1(x 
         ✅ - Separate Check for Bracket & '+/' added
+    8. Not joining Mouse and Keyboard Click for Brackets
+        
 */
 
 function eventAction(eventValue) {
@@ -222,22 +228,22 @@ function eventAction(eventValue) {
             else
                 entryScreen.textContent = entryScreen.textContent.slice(0, -1);
             
-            let lastBefore = entryScreen.textContent.replaceAll(' ', '').slice(-2, -1)
+            let before = entryScreen.textContent.replaceAll(' ', '').slice(-2, -1)
             
             // Find Error Still exists on Backspace and return corrected value
-            if('+-x/'.includes(lastBefore)) {
-                if (entryScreen.textContent == '')
+            if('+-x/'.includes(before)) {
+                // if (entryScreen.textContent == '')
                     resultScreen.textContent = ""
-                else {
-                    resultScreen.textContent = "ERROR"
-                }
+                // else {
+                //     resultScreen.textContent = "ERROR"
+                // }
             }
             // Operate on corrected value
-            else if (!'+-x/'.includes(lastBefore))
+            else if (!'+-x/'.includes(before))
                 if (entryScreen.textContent.slice(-3).match(/\s[+-x/]\s/g))
-                    resultScreen.textContent = operate(entryScreen.textContent.slice(0,-3))
+                    resultScreen.textContent = operate(entryScreen.textContent.slice(0, -3))
                 else
-                    resultScreen.textContent = operate(entryScreen.textContent.slice(0,-1))
+                    resultScreen.textContent = operate(entryScreen.textContent.slice(0, -1))
             else
                 return
         }
