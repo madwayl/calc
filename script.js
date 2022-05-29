@@ -28,7 +28,8 @@ resultScreen.textContent = "";
 ✅ - Check Length of repeating value
 7. Issue with -(-3) Calculation
 ✅ - Fixed with Check on -1 and +1 with calculation and make calculation
-8. Fix Bugs on
+8. Fix Bugs on : 3-(-3)+(3-(-3) | 3-(-3)4 | 3 + (+3)4
+✅ - Fixed with changes on `val` calculation
 */
 
 function operate(entry) {
