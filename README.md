@@ -22,3 +22,5 @@ Creating a Live Calculator, can do:
 - Change exponents to Number after equals
 - Auto increase entry screen space to enter value
 - And Other Usual ...
+
+Icon - Attribution <a href="https://www.flaticon.com/free-icons/calculator" title="calculator icons">Calculator icons created by Freepik - Flaticon</a>
