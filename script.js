@@ -335,10 +335,10 @@ function checkError() {
 }
 
 /* FIXME 🟢
-1. Hover action on KeyDown
-✅ - Added Switch with Data Attributes
-2. Long Press Toggles ClassList Wrong
-✅ - Check using Ternary Operator for Keyup or Keydown
+    1. Hover action on KeyDown
+        ✅ - Added Switch with Data Attributes
+    2. Long Press Toggles ClassList Wrong
+        ✅ - Check using Ternary Operator for Keyup or Keydown
 */
 function hoverOnKeyPress(eventKey, eventType) {
 
