@@ -85,7 +85,7 @@ div[data-section="entry"]{
     -ms-overflow-style: none;
     scrollbar-width: none;
     
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
 
     color: #8F5A00;
     
