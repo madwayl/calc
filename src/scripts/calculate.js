@@ -15,14 +15,7 @@ export default function calculate(truncEntry) {
     let indexOfOperand;
 
     while (true) {
-        if ((indexOfOperand = fixedTruncArray.indexOf('%')) == -1 ? false : true) {
-            fixedTruncArray.splice(
-                indexOfOperand - 1,
-                2,
-                bigDecimal.subtract(fixedTruncArray[indexOfOperand - 1], 100, 2)
-            );
-            continue;
-        } else if ((indexOfOperand = fixedTruncArray.indexOf('/')) == -1 ? false : true) {
+        if ((indexOfOperand = fixedTruncArray.indexOf('/')) == -1 ? false : true) {
             fixedTruncArray.splice(
                 indexOfOperand - 1,
                 3,
