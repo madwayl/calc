@@ -115,18 +115,15 @@ function eventAction(eventValue) {
     // On Equals
     else if (eventValue === "=") {
 
-        if (resultScreen.textContent.includes('e+'))
-            entryScreen.textContent = Number(resultScreen.textContent).toString()
-        else if (resultScreen.textContent.includes('e-'))
-            entryScreen.textContent = Number(resultScreen.textContent).toFixed(resultScreen.textContent.length - 3).toString()
-        else
-            entryScreen.textContent = resultScreen.textContent;
-
-        resultScreen.textContent = "";
-        bl = 0; bf = 0;
-
         // Do not acknowledge Error after Equal
-        if (resultScreen.textContent == "ERROR") entryScreen.textContent = ""
+        if (resultScreen.textContent == "ERROR") {
+            entryScreen.textContent = ""
+            return
+        }
+
+        entryScreen.textContent = resultScreen.textContent;
+        entryScreen.textContent = "";
+        bl = 0; bf = 0;
 
     }
 
@@ -154,10 +151,12 @@ function eventAction(eventValue) {
             let beforeLastChar = entryScreen.textContent.replaceAll(' ', '').slice(-2, -1)
 
             if (!'+-x/'.includes(beforeLastChar))
-                if (entryScreen.textContent.slice(-3).match(/\s[+-x/]\s/g))
+                if (entryScreen.textContent.slice(-3).match(/\s[+-x/]\s/g)) {
                     resultScreen.textContent = operate(entryScreen.textContent.slice(0, -3))
-                else
-                    resultScreen.textContent = operate(entryScreen.textContent)
+                    return
+                }
+
+            resultScreen.textContent = operate(entryScreen.textContent)
         }
 
         return
@@ -208,19 +207,26 @@ function eventAction(eventValue) {
 
     // On Other Entries
     else {
+
+        const isEventValueOperand = '+-x/'.includes(eventValue)
+
+        if ((resultScreen.textContent != '' || resultScreen.textContent != 'ERROR') && isEventValueOperand) {
+            entryScreen.textContent = resultScreen.textContent
+        }
+
         const LastChar = entryScreen.textContent.replaceAll(' ', '').slice(-1);
 
         const al_pm = '+-'.includes(eventValue) && 'x/('.includes(LastChar) //Allow '+ or -' for characters 'x/('
 
         // Add space only when last char is '+-x/'
 
-        if ('+-x/'.includes(eventValue) && !al_pm)
+        if (isEventValueOperand && !al_pm)
             entryScreen.textContent += ' ' + eventValue + ' ';
         else
             entryScreen.textContent += eventValue;
 
         // Return Error on double operator entry
-        if (("+-x/(".includes(LastChar) && "+-x/".includes(eventValue) && LastChar != '') && !al_pm) {
+        if (("+-x/(".includes(LastChar) && isEventValueOperand && LastChar != '') && !al_pm) {
             resultScreen.textContent = 'ERROR';
         } else {
             if ("+-x/(".includes(eventValue))

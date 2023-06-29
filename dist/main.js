@@ -29,10 +29,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
     box-sizing: border-box;
     font-family: 'Spline Sans Mono', monospace;
 
-    display:flex; 
-    flex-direction:column; 
-    justify-content:center;
-    min-height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
 
     min-width: fit-content;
 
@@ -61,7 +61,7 @@ div[data-section="body"] {
 }
 
 /* SECTION: SCREEN */
-div[data-section="screen"]{
+div[data-section="screen"] {
     width: 270px;
     min-height: auto;
 
@@ -73,7 +73,7 @@ div[data-section="screen"]{
 }
 
 /* RESULT */
-div[data-section="result"]{
+div[data-section="result"] {
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -83,17 +83,21 @@ div[data-section="result"]{
     font-weight: 600;
     font-size: 45px;
     overflow-x: auto;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 
     color: #FFD285;
 }
+
 div[data-section="result"]::-webkit-scrollbar {
-    display: none; /*  Chrome */
+    display: none;
+    /*  Chrome */
 }
 
 /* ENTER */
-div[data-section="entry"]{
+div[data-section="entry"] {
     min-height: 30px;
     height: max-content;
     font-size: 20px;
@@ -101,16 +105,16 @@ div[data-section="entry"]{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    justify-content: flex-end; 
+    justify-content: flex-end;
     overflow-x: auto;
-    
+
     -ms-overflow-style: none;
     scrollbar-width: none;
-    
-    overflow-wrap: break-word;
+
+    /* overflow-wrap: break-word; */
 
     color: #8F5A00;
-    
+
     margin-top: 10px;
 }
 
@@ -154,6 +158,7 @@ input:active {
     background-color: #FFDA99;
     border-radius: 30%;
 }
+
 /* !SECTION */
 
 /* SECTION: Operators */
@@ -166,11 +171,12 @@ input:active {
     color: #14253E;
 }
 
-.symbol-active{
+.symbol-active {
     background-color: #FB8F23;
     color: #14253E;
     border-radius: 30%;
 }
+
 /* !SECTION */
 
 /* SECTION: Delete */
@@ -188,10 +194,11 @@ input:active {
     color: #14253E;
     border-radius: 30%;
 }
+
 /* !SECTION */
 
 /* SECTION: Backspace */
-.backspace{
+.backspace {
     background-color: #D37D4A;
 }
 
@@ -205,6 +212,7 @@ input:active {
     color: #14253E;
     border-radius: 30%;
 }
+
 /* !SECTION */
 
 div[data-section*="col"] {
@@ -223,12 +231,13 @@ div[data-section="symbols"] {
     flex-direction: column;
     gap: 10px;
 }
+
 /* !SECTION */
 
 footer {
     text-align: center;
     font-weight: 300;
-}`, "",{"version":3,"sources":["webpack://./src/styles/style.css"],"names":[],"mappings":"AAEA;IACI,SAAS;IACT,UAAU;IACV,eAAe;IACf,sBAAsB;IACtB,0CAA0C;;IAE1C,YAAY;IACZ,qBAAqB;IACrB,sBAAsB;IACtB,gBAAgB;;IAEhB,sBAAsB;;IAEtB,yBAAyB;AAC7B;;;AAGA;IACI,aAAa;IACb,sBAAsB;IACtB,uBAAuB;IACvB,mBAAmB;IACnB,iBAAiB;AACrB;;AAEA;IACI,+BAA+B;IAC/B,kCAAkC;IAClC,aAAa;IACb,mBAAmB;IACnB,2BAA2B;AAC/B;;AAEA;IACI,yBAAyB;AAC7B;;AAEA,oBAAoB;AACpB;IACI,YAAY;IACZ,gBAAgB;;IAEhB,aAAa;IACb,mBAAmB;IACnB,mBAAmB;IACnB,iBAAiB;;AAErB;;AAEA,WAAW;AACX;IACI,aAAa;IACb,qBAAqB;IACrB,yBAAyB;IACzB,eAAe;IACf,sBAAsB;IACtB,gBAAgB;IAChB,gBAAgB;IAChB,eAAe;IACf,gBAAgB;IAChB,wBAAwB,GAAG,gBAAgB;IAC3C,qBAAqB,EAAE,YAAY;;IAEnC,cAAc;AAClB;AACA;IACI,aAAa,EAAE,YAAY;AAC/B;;AAEA,UAAU;AACV;IACI,gBAAgB;IAChB,mBAAmB;IACnB,eAAe;IACf,eAAe;IACf,aAAa;IACb,sBAAsB;IACtB,qBAAqB;IACrB,yBAAyB;IACzB,gBAAgB;;IAEhB,wBAAwB;IACxB,qBAAqB;;IAErB,yBAAyB;;IAEzB,cAAc;;IAEd,gBAAgB;AACpB;;AAEA;IACI,aAAa;AACjB;;AAEA,aAAa;;AAEb,qBAAqB;AACrB;IACI,aAAa;IACb,SAAS;IACT,aAAa;AACjB;;AAEA;IACI,oBAAoB;IACpB,WAAW;IACX,YAAY;IACZ,gBAAgB;IAChB,0CAA0C;IAC1C,gBAAgB;IAChB,SAAS;IACT,cAAc;IACd,yBAAyB;AAC7B;;AAEA;IACI,kBAAkB;AACtB;;AAEA,qBAAqB;AACrB;IACI,cAAc;IACd,yBAAyB;AAC7B;;AAEA;IACI,cAAc;IACd,yBAAyB;IACzB,kBAAkB;AACtB;AACA,aAAa;;AAEb,uBAAuB;AACvB;IACI,yBAAyB;AAC7B;;AAEA;IACI,yBAAyB;IACzB,cAAc;AAClB;;AAEA;IACI,yBAAyB;IACzB,cAAc;IACd,kBAAkB;AACtB;AACA,aAAa;;AAEb,oBAAoB;AACpB;IACI,yBAAyB;AAC7B;;AAEA;IACI,yBAAyB;IACzB,cAAc;AAClB;;AAEA;IACI,yBAAyB;IACzB,cAAc;IACd,kBAAkB;AACtB;AACA,aAAa;;AAEb,uBAAuB;AACvB;IACI,yBAAyB;AAC7B;;AAEA;IACI,yBAAyB;IACzB,cAAc;AAClB;;AAEA;IACI,yBAAyB;IACzB,cAAc;IACd,kBAAkB;AACtB;AACA,aAAa;;AAEb;IACI,aAAa;IACb,sBAAsB;IACtB,SAAS;AACb;;AAEA;IACI,aAAa;IACb,SAAS;AACb;;AAEA;IACI,aAAa;IACb,sBAAsB;IACtB,SAAS;AACb;AACA,aAAa;;AAEb;IACI,kBAAkB;IAClB,gBAAgB;AACpB","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@300;400;500;600&display=swap');\r\n\r\nbody {\r\n    margin: 0;\r\n    padding: 0;\r\n    text-align: end;\r\n    box-sizing: border-box;\r\n    font-family: 'Spline Sans Mono', monospace;\r\n\r\n    display:flex; \r\n    flex-direction:column; \r\n    justify-content:center;\r\n    min-height:100vh;\r\n\r\n    min-width: fit-content;\r\n\r\n    background-color: #F2E5D7;\r\n}\r\n\r\n\r\ndiv[data-section=\"calculator\"] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    margin: 50px auto;\r\n}\r\n\r\ndiv[data-section=\"body\"] {\r\n    /* background-color: #A8DADC; */\r\n    box-shadow: 2px 2px 24px #14110f6d;\r\n    padding: 15px;\r\n    border-radius: 15px;\r\n    background-color: #14110fd8;\r\n}\r\n\r\n.error {\r\n    color: #E63946 !important;\r\n}\r\n\r\n/* SECTION: SCREEN */\r\ndiv[data-section=\"screen\"]{\r\n    width: 270px;\r\n    min-height: auto;\r\n\r\n    padding: 10px;\r\n    border-radius: 15px;\r\n    margin-bottom: 15px;\r\n    text-align: right;\r\n\r\n}\r\n\r\n/* RESULT */\r\ndiv[data-section=\"result\"]{\r\n    display: flex;\r\n    align-items: flex-end;\r\n    justify-content: flex-end;\r\n    flex-wrap: wrap;\r\n    flex-direction: column;\r\n    min-height: 55px;\r\n    font-weight: 600;\r\n    font-size: 45px;\r\n    overflow-x: auto;\r\n    -ms-overflow-style: none;  /* IE and Edge */\r\n    scrollbar-width: none; /* Firefox */\r\n\r\n    color: #FFD285;\r\n}\r\ndiv[data-section=\"result\"]::-webkit-scrollbar {\r\n    display: none; /*  Chrome */\r\n}\r\n\r\n/* ENTER */\r\ndiv[data-section=\"entry\"]{\r\n    min-height: 30px;\r\n    height: max-content;\r\n    font-size: 20px;\r\n    flex-wrap: wrap;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-end;\r\n    justify-content: flex-end; \r\n    overflow-x: auto;\r\n    \r\n    -ms-overflow-style: none;\r\n    scrollbar-width: none;\r\n    \r\n    overflow-wrap: break-word;\r\n\r\n    color: #8F5A00;\r\n    \r\n    margin-top: 10px;\r\n}\r\n\r\ndiv[data-section=\"entry\"]::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\n/* !SECTION */\r\n\r\n/* SECTION: Buttons */\r\ndiv[data-section=\"buttons\"] {\r\n    display: flex;\r\n    gap: 10px;\r\n    padding: 10px;\r\n}\r\n\r\ninput {\r\n    border-radius: 300px;\r\n    width: 60px;\r\n    height: 60px;\r\n    font-size: large;\r\n    font-family: 'Spline Sans Mono', monospace;\r\n    font-weight: 600;\r\n    border: 0;\r\n    color: #23416C;\r\n    background-color: #ffeccc;\r\n}\r\n\r\ninput:active {\r\n    border-radius: 30%;\r\n}\r\n\r\n/* SECTION: Numbers */\r\n.number:hover {\r\n    color: #14253E;\r\n    background-color: #FFDA99;\r\n}\r\n\r\n.number-active {\r\n    color: #14253E;\r\n    background-color: #FFDA99;\r\n    border-radius: 30%;\r\n}\r\n/* !SECTION */\r\n\r\n/* SECTION: Operators */\r\n.symbol {\r\n    background-color: #FCAC5D;\r\n}\r\n\r\n.symbol:hover {\r\n    background-color: #FB8F23;\r\n    color: #14253E;\r\n}\r\n\r\n.symbol-active{\r\n    background-color: #FB8F23;\r\n    color: #14253E;\r\n    border-radius: 30%;\r\n}\r\n/* !SECTION */\r\n\r\n/* SECTION: Delete */\r\n.delete {\r\n    background-color: #E63946;\r\n}\r\n\r\n.delete:hover {\r\n    background-color: #DA1B2B;\r\n    color: #14253E;\r\n}\r\n\r\n.delete-active {\r\n    background-color: #DA1B2B;\r\n    color: #14253E;\r\n    border-radius: 30%;\r\n}\r\n/* !SECTION */\r\n\r\n/* SECTION: Backspace */\r\n.backspace{\r\n    background-color: #D37D4A;\r\n}\r\n\r\n.backspace:hover {\r\n    background-color: #C56630;\r\n    color: #14253E;\r\n}\r\n\r\n.backspace-active {\r\n    background-color: #C56630;\r\n    color: #14253E;\r\n    border-radius: 30%;\r\n}\r\n/* !SECTION */\r\n\r\ndiv[data-section*=\"col\"] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 10px;\r\n}\r\n\r\ndiv[data-section*=\"row\"] {\r\n    display: flex;\r\n    gap: 10px;\r\n}\r\n\r\ndiv[data-section=\"symbols\"] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 10px;\r\n}\r\n/* !SECTION */\r\n\r\nfooter {\r\n    text-align: center;\r\n    font-weight: 300;\r\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/styles/style.css"],"names":[],"mappings":"AAEA;IACI,SAAS;IACT,UAAU;IACV,eAAe;IACf,sBAAsB;IACtB,0CAA0C;;IAE1C,aAAa;IACb,sBAAsB;IACtB,uBAAuB;IACvB,iBAAiB;;IAEjB,sBAAsB;;IAEtB,yBAAyB;AAC7B;;;AAGA;IACI,aAAa;IACb,sBAAsB;IACtB,uBAAuB;IACvB,mBAAmB;IACnB,iBAAiB;AACrB;;AAEA;IACI,+BAA+B;IAC/B,kCAAkC;IAClC,aAAa;IACb,mBAAmB;IACnB,2BAA2B;AAC/B;;AAEA;IACI,yBAAyB;AAC7B;;AAEA,oBAAoB;AACpB;IACI,YAAY;IACZ,gBAAgB;;IAEhB,aAAa;IACb,mBAAmB;IACnB,mBAAmB;IACnB,iBAAiB;;AAErB;;AAEA,WAAW;AACX;IACI,aAAa;IACb,qBAAqB;IACrB,yBAAyB;IACzB,eAAe;IACf,sBAAsB;IACtB,gBAAgB;IAChB,gBAAgB;IAChB,eAAe;IACf,gBAAgB;IAChB,wBAAwB;IACxB,gBAAgB;IAChB,qBAAqB;IACrB,YAAY;;IAEZ,cAAc;AAClB;;AAEA;IACI,aAAa;IACb,YAAY;AAChB;;AAEA,UAAU;AACV;IACI,gBAAgB;IAChB,mBAAmB;IACnB,eAAe;IACf,eAAe;IACf,aAAa;IACb,sBAAsB;IACtB,qBAAqB;IACrB,yBAAyB;IACzB,gBAAgB;;IAEhB,wBAAwB;IACxB,qBAAqB;;IAErB,+BAA+B;;IAE/B,cAAc;;IAEd,gBAAgB;AACpB;;AAEA;IACI,aAAa;AACjB;;AAEA,aAAa;;AAEb,qBAAqB;AACrB;IACI,aAAa;IACb,SAAS;IACT,aAAa;AACjB;;AAEA;IACI,oBAAoB;IACpB,WAAW;IACX,YAAY;IACZ,gBAAgB;IAChB,0CAA0C;IAC1C,gBAAgB;IAChB,SAAS;IACT,cAAc;IACd,yBAAyB;AAC7B;;AAEA;IACI,kBAAkB;AACtB;;AAEA,qBAAqB;AACrB;IACI,cAAc;IACd,yBAAyB;AAC7B;;AAEA;IACI,cAAc;IACd,yBAAyB;IACzB,kBAAkB;AACtB;;AAEA,aAAa;;AAEb,uBAAuB;AACvB;IACI,yBAAyB;AAC7B;;AAEA;IACI,yBAAyB;IACzB,cAAc;AAClB;;AAEA;IACI,yBAAyB;IACzB,cAAc;IACd,kBAAkB;AACtB;;AAEA,aAAa;;AAEb,oBAAoB;AACpB;IACI,yBAAyB;AAC7B;;AAEA;IACI,yBAAyB;IACzB,cAAc;AAClB;;AAEA;IACI,yBAAyB;IACzB,cAAc;IACd,kBAAkB;AACtB;;AAEA,aAAa;;AAEb,uBAAuB;AACvB;IACI,yBAAyB;AAC7B;;AAEA;IACI,yBAAyB;IACzB,cAAc;AAClB;;AAEA;IACI,yBAAyB;IACzB,cAAc;IACd,kBAAkB;AACtB;;AAEA,aAAa;;AAEb;IACI,aAAa;IACb,sBAAsB;IACtB,SAAS;AACb;;AAEA;IACI,aAAa;IACb,SAAS;AACb;;AAEA;IACI,aAAa;IACb,sBAAsB;IACtB,SAAS;AACb;;AAEA,aAAa;;AAEb;IACI,kBAAkB;IAClB,gBAAgB;AACpB","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@300;400;500;600&display=swap');\r\n\r\nbody {\r\n    margin: 0;\r\n    padding: 0;\r\n    text-align: end;\r\n    box-sizing: border-box;\r\n    font-family: 'Spline Sans Mono', monospace;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    min-height: 100vh;\r\n\r\n    min-width: fit-content;\r\n\r\n    background-color: #F2E5D7;\r\n}\r\n\r\n\r\ndiv[data-section=\"calculator\"] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    margin: 50px auto;\r\n}\r\n\r\ndiv[data-section=\"body\"] {\r\n    /* background-color: #A8DADC; */\r\n    box-shadow: 2px 2px 24px #14110f6d;\r\n    padding: 15px;\r\n    border-radius: 15px;\r\n    background-color: #14110fd8;\r\n}\r\n\r\n.error {\r\n    color: #E63946 !important;\r\n}\r\n\r\n/* SECTION: SCREEN */\r\ndiv[data-section=\"screen\"] {\r\n    width: 270px;\r\n    min-height: auto;\r\n\r\n    padding: 10px;\r\n    border-radius: 15px;\r\n    margin-bottom: 15px;\r\n    text-align: right;\r\n\r\n}\r\n\r\n/* RESULT */\r\ndiv[data-section=\"result\"] {\r\n    display: flex;\r\n    align-items: flex-end;\r\n    justify-content: flex-end;\r\n    flex-wrap: wrap;\r\n    flex-direction: column;\r\n    min-height: 55px;\r\n    font-weight: 600;\r\n    font-size: 45px;\r\n    overflow-x: auto;\r\n    -ms-overflow-style: none;\r\n    /* IE and Edge */\r\n    scrollbar-width: none;\r\n    /* Firefox */\r\n\r\n    color: #FFD285;\r\n}\r\n\r\ndiv[data-section=\"result\"]::-webkit-scrollbar {\r\n    display: none;\r\n    /*  Chrome */\r\n}\r\n\r\n/* ENTER */\r\ndiv[data-section=\"entry\"] {\r\n    min-height: 30px;\r\n    height: max-content;\r\n    font-size: 20px;\r\n    flex-wrap: wrap;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-end;\r\n    justify-content: flex-end;\r\n    overflow-x: auto;\r\n\r\n    -ms-overflow-style: none;\r\n    scrollbar-width: none;\r\n\r\n    /* overflow-wrap: break-word; */\r\n\r\n    color: #8F5A00;\r\n\r\n    margin-top: 10px;\r\n}\r\n\r\ndiv[data-section=\"entry\"]::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\n/* !SECTION */\r\n\r\n/* SECTION: Buttons */\r\ndiv[data-section=\"buttons\"] {\r\n    display: flex;\r\n    gap: 10px;\r\n    padding: 10px;\r\n}\r\n\r\ninput {\r\n    border-radius: 300px;\r\n    width: 60px;\r\n    height: 60px;\r\n    font-size: large;\r\n    font-family: 'Spline Sans Mono', monospace;\r\n    font-weight: 600;\r\n    border: 0;\r\n    color: #23416C;\r\n    background-color: #ffeccc;\r\n}\r\n\r\ninput:active {\r\n    border-radius: 30%;\r\n}\r\n\r\n/* SECTION: Numbers */\r\n.number:hover {\r\n    color: #14253E;\r\n    background-color: #FFDA99;\r\n}\r\n\r\n.number-active {\r\n    color: #14253E;\r\n    background-color: #FFDA99;\r\n    border-radius: 30%;\r\n}\r\n\r\n/* !SECTION */\r\n\r\n/* SECTION: Operators */\r\n.symbol {\r\n    background-color: #FCAC5D;\r\n}\r\n\r\n.symbol:hover {\r\n    background-color: #FB8F23;\r\n    color: #14253E;\r\n}\r\n\r\n.symbol-active {\r\n    background-color: #FB8F23;\r\n    color: #14253E;\r\n    border-radius: 30%;\r\n}\r\n\r\n/* !SECTION */\r\n\r\n/* SECTION: Delete */\r\n.delete {\r\n    background-color: #E63946;\r\n}\r\n\r\n.delete:hover {\r\n    background-color: #DA1B2B;\r\n    color: #14253E;\r\n}\r\n\r\n.delete-active {\r\n    background-color: #DA1B2B;\r\n    color: #14253E;\r\n    border-radius: 30%;\r\n}\r\n\r\n/* !SECTION */\r\n\r\n/* SECTION: Backspace */\r\n.backspace {\r\n    background-color: #D37D4A;\r\n}\r\n\r\n.backspace:hover {\r\n    background-color: #C56630;\r\n    color: #14253E;\r\n}\r\n\r\n.backspace-active {\r\n    background-color: #C56630;\r\n    color: #14253E;\r\n    border-radius: 30%;\r\n}\r\n\r\n/* !SECTION */\r\n\r\ndiv[data-section*=\"col\"] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 10px;\r\n}\r\n\r\ndiv[data-section*=\"row\"] {\r\n    display: flex;\r\n    gap: 10px;\r\n}\r\n\r\ndiv[data-section=\"symbols\"] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 10px;\r\n}\r\n\r\n/* !SECTION */\r\n\r\nfooter {\r\n    text-align: center;\r\n    font-weight: 300;\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -485,18 +494,15 @@ function eventAction(eventValue) {
     // On Equals
     else if (eventValue === "=") {
 
-        if (resultScreen.textContent.includes('e+'))
-            entryScreen.textContent = Number(resultScreen.textContent).toString()
-        else if (resultScreen.textContent.includes('e-'))
-            entryScreen.textContent = Number(resultScreen.textContent).toFixed(resultScreen.textContent.length - 3).toString()
-        else
-            entryScreen.textContent = resultScreen.textContent;
-
-        resultScreen.textContent = "";
-        bl = 0; bf = 0;
-
         // Do not acknowledge Error after Equal
-        if (resultScreen.textContent == "ERROR") entryScreen.textContent = ""
+        if (resultScreen.textContent == "ERROR") {
+            entryScreen.textContent = ""
+            return
+        }
+
+        entryScreen.textContent = resultScreen.textContent;
+        entryScreen.textContent = "";
+        bl = 0; bf = 0;
 
     }
 
@@ -524,10 +530,12 @@ function eventAction(eventValue) {
             let beforeLastChar = entryScreen.textContent.replaceAll(' ', '').slice(-2, -1)
 
             if (!'+-x/'.includes(beforeLastChar))
-                if (entryScreen.textContent.slice(-3).match(/\s[+-x/]\s/g))
+                if (entryScreen.textContent.slice(-3).match(/\s[+-x/]\s/g)) {
                     resultScreen.textContent = operate(entryScreen.textContent.slice(0, -3))
-                else
-                    resultScreen.textContent = operate(entryScreen.textContent)
+                    return
+                }
+
+            resultScreen.textContent = operate(entryScreen.textContent)
         }
 
         return
@@ -578,19 +586,26 @@ function eventAction(eventValue) {
 
     // On Other Entries
     else {
+
+        const isEventValueOperand = '+-x/'.includes(eventValue)
+
+        if ((resultScreen.textContent != '' || resultScreen.textContent != 'ERROR') && isEventValueOperand) {
+            entryScreen.textContent = resultScreen.textContent
+        }
+
         const LastChar = entryScreen.textContent.replaceAll(' ', '').slice(-1);
 
         const al_pm = '+-'.includes(eventValue) && 'x/('.includes(LastChar) //Allow '+ or -' for characters 'x/('
 
         // Add space only when last char is '+-x/'
 
-        if ('+-x/'.includes(eventValue) && !al_pm)
+        if (isEventValueOperand && !al_pm)
             entryScreen.textContent += ' ' + eventValue + ' ';
         else
             entryScreen.textContent += eventValue;
 
         // Return Error on double operator entry
-        if (("+-x/(".includes(LastChar) && "+-x/".includes(eventValue) && LastChar != '') && !al_pm) {
+        if (("+-x/(".includes(LastChar) && isEventValueOperand && LastChar != '') && !al_pm) {
             resultScreen.textContent = 'ERROR';
         } else {
             if ("+-x/(".includes(eventValue))
