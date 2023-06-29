@@ -318,14 +318,7 @@ function calculate(truncEntry) {
     let indexOfOperand;
 
     while (true) {
-        if ((indexOfOperand = fixedTruncArray.indexOf('%')) == -1 ? false : true) {
-            fixedTruncArray.splice(
-                indexOfOperand - 1,
-                2,
-                js_big_decimal__WEBPACK_IMPORTED_MODULE_0___default().subtract(fixedTruncArray[indexOfOperand - 1], 100, 2)
-            );
-            continue;
-        } else if ((indexOfOperand = fixedTruncArray.indexOf('/')) == -1 ? false : true) {
+        if ((indexOfOperand = fixedTruncArray.indexOf('/')) == -1 ? false : true) {
             fixedTruncArray.splice(
                 indexOfOperand - 1,
                 3,
@@ -379,9 +372,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let bf = 0, bl = 0, // Brackets Front + Brackets Last
-    result = null  // Result of the entry value
-
-let oldTime, newTime; // Calculate Time for Long Press on Backspace
+    oldTime, newTime; // Calculate Time for Long Press on Backspace
 
 
 const entryScreen = document.querySelector('div[data-section="entry"]');
@@ -418,27 +409,34 @@ function operate(entry) {
 
     // entry = entry.replaceAll(' ', '')
 
+    while (entry.indexOf('%') != -1) {
+        entry = entry.replace('%', ' / 100')
+    }
+
     try {
         while (beforeIndex !== -1) {
 
             beforeIndex = entry.lastIndexOf('(')
             afterIndex = entry.indexOf(')', beforeIndex)
 
-            if (beforeIndex !== -1 && afterIndex === -1) {
+            if (beforeIndex === -1) {
+                return (0,_calculate__WEBPACK_IMPORTED_MODULE_1__["default"])(entry)
+            } else if (beforeIndex !== -1 && afterIndex === -1) {
                 entry += ')';
                 afterIndex = entry.indexOf(')', beforeIndex);
-            }
+            } else { }
 
             let bracketedEntry = entry.slice(beforeIndex + 1, afterIndex)
 
-            entry = entry.slice(beforeIndex - 1, bracketedEntry.length, (0,_calculate__WEBPACK_IMPORTED_MODULE_1__["default"])(bracketedEntry))
+
+            entry = entry.slice(0, beforeIndex) + ' * ' + (0,_calculate__WEBPACK_IMPORTED_MODULE_1__["default"])(bracketedEntry) + entry.slice(afterIndex + 1)
 
         }
     } catch (e) {
         return 'ERROR'
     }
 
-    return result
+    return entry
 }
 // !SECTION
 
@@ -720,6 +718,9 @@ backspace.addEventListener('mouseup', () => {
     newTime = new Date
 });
 // !SECTION
+
+console.log('Done here. . .')
+
 
 /***/ })
 
