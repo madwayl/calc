@@ -5,10 +5,10 @@
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --progress --mode=production",
-    "build": "webpack",
+    "build": "webpack --mode=production",
+    "dev": "webpack --progress --config=webpack.config.dev.js",
     "watch": "webpack --progress --watch",
-    "serve": "webpack-dev-server --open",
+    "server": "webpack-dev-server --open",
     "gh-deploy": "git subtree push --prefix dist origin gh-pages --squash"
   },
   "author": "",

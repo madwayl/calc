@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    mode: 'prodcution',
+    mode: 'development',
     entry: './src/scripts/script.js',
     output: {
         filename: "[name].js",
@@ -25,7 +25,7 @@ module.exports = {
             favicon: './src/image/logo.png'
         })
     ],
-    devtool: 'source-map',
+    devtool: 'inline-source-map',
     devServer: {
         static: './dist',
     },
