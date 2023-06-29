@@ -21,7 +21,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html',
             filename: 'index.html',
-            inject: 'head',
+            inject: 'body',
             favicon: './src/image/logo.png'
         })
     ],
