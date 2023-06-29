@@ -4,9 +4,9 @@ Much similar to Google Calculator - but with very less features (┬┬﹏┬┬
 
 ## What it means?
 
-- C --> Clear / 'Delete' or 'c' on Keyboard
+- `C` --> Clear / 'Delete' or 'c' on Keyboard
   - Clears everything
-- B --> Backspace or 'b' on Keyboard
+- `B` --> Backspace or 'b' on Keyboard
   - Clear Entry only
 - `=` --> Clears Result and Update Entry Screen
 - `*`/ X --> Multiply

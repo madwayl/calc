@@ -1,9 +1,11 @@
+import '../styles/style.css'
+import calculate from 'script.js'
 
 let bf = 0, bl = 0, // Brackets Front + Brackets Last
     result = null  // Result of the entry value
 
 let oldTime, newTime; // Calculate Time for Long Press on Backspace
-    
+
 
 const entryScreen = document.querySelector('div[data-section="entry"]');
 entryScreen.textContent = "";
@@ -36,71 +38,70 @@ function operate(entry) {
 
     let beforeIndex, afterIndex, val
     let beforeIsNumber, afterIsNumber
-    
-    entry = entry.replaceAll('x','*')
+
+    entry = entry.replaceAll('x', '*')
 
     entry = entry.replaceAll(' ', '')
-    
+
     while (entry.indexOf('%') != -1) {
-        entry = '0123456789'.includes(entry.charAt(entry.indexOf('%')+1)) && 
-                entry.charAt(entry.indexOf('%')+1) != '' ?
-                    entry.replace('%', '/100*') :
-                    entry.replace('%', '/100')
+        entry = '0123456789'.includes(entry.charAt(entry.indexOf('%') + 1)) &&
+            entry.charAt(entry.indexOf('%') + 1) != '' ?
+            entry.replace('%', '/100*') :
+            entry.replace('%', '/100')
     }
 
-    
-    try {   
-        check: while (beforeIndex !== -1) {
-            
+    try {
+        while (beforeIndex !== -1) {
+
             beforeIndex = entry.lastIndexOf('(')
             afterIndex = entry.indexOf(')', beforeIndex)
 
-            
+
             if (beforeIndex !== -1 && afterIndex === -1) {
-                entry += ')'; 
+                entry += ')';
                 afterIndex = entry.indexOf(')', beforeIndex);
             }
 
             // REVIEW
             // - ✅ Learning `Function()' to use instead of eval()
-            
-            val = Function('return ' + entry.slice(beforeIndex, afterIndex+1))();
-            
-            beforeIsNumber = '0123456789'.includes(entry.charAt(beforeIndex-1)) && entry.charAt(beforeIndex-1) !== '';
-            afterIsNumber = '0123456789'.includes(entry.charAt(afterIndex+1)) && entry.charAt(afterIndex+1) !== '';
 
-            beforeChar = entry.charAt(beforeIndex-1)
+            val = Function('return ' + entry.slice(beforeIndex, afterIndex + 1))();
 
-            if (beforeIndex === -1) break check;
-            
+            beforeIsNumber = '0123456789'.includes(entry.charAt(beforeIndex - 1)) && entry.charAt(beforeIndex - 1) !== '';
+            afterIsNumber = '0123456789'.includes(entry.charAt(afterIndex + 1)) && entry.charAt(afterIndex + 1) !== '';
+
+            beforeChar = entry.charAt(beforeIndex - 1)
+
+            if (beforeIndex === -1) break;
+
             if (beforeIndex !== -1) {
                 if (beforeIsNumber && afterIsNumber) {
-                    entry = entry.slice(0, beforeIndex)  + `*${val}*` + entry.slice(afterIndex+1);
+                    entry = entry.slice(0, beforeIndex) + `*${val}*` + entry.slice(afterIndex + 1);
                 } else if (afterIsNumber) {
-                    if(val < 0) {
+                    if (val < 0) {
                         if (beforeChar == '-')
-                            entry = entry.slice(0, beforeIndex - 1)  + `+${-1 * val}*` + entry.slice(afterIndex+1);
+                            entry = entry.slice(0, beforeIndex - 1) + `+${-1 * val}*` + entry.slice(afterIndex + 1);
                         else if (beforeChar == '+')
-                            entry = entry.slice(0, beforeIndex - 1)  + `${val}*` + entry.slice(afterIndex+1);
+                            entry = entry.slice(0, beforeIndex - 1) + `${val}*` + entry.slice(afterIndex + 1);
                         else
-                            entry = entry.slice(0, beforeIndex)  + `${val}*` + entry.slice(afterIndex+1);
+                            entry = entry.slice(0, beforeIndex) + `${val}*` + entry.slice(afterIndex + 1);
                     } else
-                        entry = entry.slice(0, beforeIndex)  + `${val}*` + entry.slice(afterIndex+1);
+                        entry = entry.slice(0, beforeIndex) + `${val}*` + entry.slice(afterIndex + 1);
                 } else if (beforeIsNumber) {
-                    entry = entry.slice(0, beforeIndex)  + `*${val}` + entry.slice(afterIndex+1);
+                    entry = entry.slice(0, beforeIndex) + `*${val}` + entry.slice(afterIndex + 1);
                 } else {
                     if (beforeChar == '-') {
                         if (!beforeIsNumber && val < 0) {
                             if (afterIsNumber) {
-                                entry = entry.slice(0, beforeIndex - 1)  + `+${-1 * val}*` + entry.slice(afterIndex+1);
+                                entry = entry.slice(0, beforeIndex - 1) + `+${-1 * val}*` + entry.slice(afterIndex + 1);
                             } else {
-                                entry = entry.slice(0, beforeIndex - 1)  + `+${-1 * val}` + entry.slice(afterIndex+1);
+                                entry = entry.slice(0, beforeIndex - 1) + `+${-1 * val}` + entry.slice(afterIndex + 1);
                             }
                         } else {
-                            entry = entry.slice(0, beforeIndex)  + `${val}` + entry.slice(afterIndex+1);
+                            entry = entry.slice(0, beforeIndex) + `${val}` + entry.slice(afterIndex + 1);
                         }
                     } else {
-                        entry = entry.slice(0, beforeIndex)  + `${val}` + entry.slice(afterIndex+1);
+                        entry = entry.slice(0, beforeIndex) + `${val}` + entry.slice(afterIndex + 1);
                     }
                 }
             }
@@ -127,13 +128,13 @@ function operate(entry) {
             else
                 result = result
         // If Decimal
-        else 
+        else
             if (result.toString().length > 4) {
-                
+
                 // Check if repeating Decimal
                 decimal = result.toString().split('.')[1]
                 count = decimal.split(`${decimal.slice(-3, -2)}`).length - 1
-                
+
                 if (count > 5)
                     result = result.toFixed(2)
                 else
@@ -182,28 +183,29 @@ function operate(entry) {
 
 function eventAction(eventValue) {
 
-    let LastChar;
+    // let LastChar;
 
     // On Clear
     if (eventValue === "C") {
         entryScreen.textContent = "";
         resultScreen.textContent = "";
         bl = 0; bf = 0;
+        return
     }
 
     // On Equals
     else if (eventValue === "=") {
-        
+
         if (resultScreen.textContent.includes('e+'))
             entryScreen.textContent = Number(resultScreen.textContent).toString()
         else if (resultScreen.textContent.includes('e-'))
             entryScreen.textContent = Number(resultScreen.textContent).toFixed(resultScreen.textContent.length - 3).toString()
         else
             entryScreen.textContent = resultScreen.textContent;
-        
+
         resultScreen.textContent = "";
         bl = 0; bf = 0;
-        
+
         // Do not acknowledge Error after Equal
         if (resultScreen.textContent == "ERROR") entryScreen.textContent = ""
 
@@ -211,13 +213,13 @@ function eventAction(eventValue) {
 
     // On Backspace
     else if (eventValue === "B") {
-        
+
         // Long Press Backspace
         if (newTime - oldTime > 1000) {
             entryScreen.textContent = "";
             bl = 0; bf = 0;
             // console.log(newTime - oldTime)
-        } 
+        }
         // Short Press Backspace
         else {
 
@@ -229,36 +231,36 @@ function eventAction(eventValue) {
                 entryScreen.textContent = entryScreen.textContent.slice(0, -3);
             else
                 entryScreen.textContent = entryScreen.textContent.slice(0, -1);
-            
-            let before = entryScreen.textContent.replaceAll(' ', '').slice(-2, -1)
-            
+
+            let beforeLastChar = entryScreen.textContent.replaceAll(' ', '').slice(-2, -1)
+
             // Find Error Still exists on Backspace and return corrected value
-            if('+-x/'.includes(before)) {
-                // if (entryScreen.textContent == '')
-                    resultScreen.textContent = ""
-                // else {
-                //     resultScreen.textContent = "ERROR"
-                // }
-            }
+            // if ('+-x/'.includes(beforeLastChar)) {
+            // if (entryScreen.textContent == '')
+            // resultScreen.textContent = ""
+            // else {
+            //     resultScreen.textContent = "ERROR"
+            // }
+            // }
             // Operate on corrected value
-            else if (!'+-x/'.includes(before))
+            if (!'+-x/'.includes(beforeLastChar))
                 if (entryScreen.textContent.slice(-3).match(/\s[+-x/]\s/g))
                     resultScreen.textContent = operate(entryScreen.textContent.slice(0, -3))
                 else
-                    resultScreen.textContent = operate(entryScreen.textContent.slice(0, -1))
-            else
-                return
+                    resultScreen.textContent = operate(entryScreen.textContent)
         }
+
+        return
     }
 
     // On Brackets by Mouse Click
-    
+
     /* FIXME 🟢
     Fixing the Bracket errors (incorrect Bracket Sequence) showing up
         - ((8)9) ✅
         - ((9)-(9)) ✅
     */
-    
+
     else if (eventValue === "()") {
         let islastValueNumber = '0123456789'.includes(entryScreen.textContent.slice(-1));
         let islastValueBracket = ')' === entryScreen.textContent.slice(-1)
@@ -273,16 +275,18 @@ function eventAction(eventValue) {
             entryScreen.textContent += "(";
             bf++
         }
-        
+
         if (bf - bl == 0 && entryScreen.textContent.slice(-1) == ')') {
             resultScreen.textContent = operate(entryScreen.textContent)
         }
+        return
     }
 
     // On Keyboard Specific Brackets
     else if (eventValue === '(') {
         bf++;
         entryScreen.textContent += eventValue;
+        return
     }
 
     else if (eventValue === ')') {
@@ -290,38 +294,41 @@ function eventAction(eventValue) {
         entryScreen.textContent += eventValue;
 
         if (!(bf >= bl)) return 'ERROR';
-    }   
-    
+    }
+
     // On Other Entries
     else {
-        LastChar = entryScreen.textContent.replaceAll(' ', '').slice(-1);
+        const LastChar = entryScreen.textContent.replaceAll(' ', '').slice(-1);
 
         const al_pm = '+-'.includes(eventValue) && 'x/('.includes(LastChar) //Allow '+ or -' for characters 'x/('
 
-        // Add space only when last char is not 'x/('
+        // Add space only when last char is '+-x/'
 
         if ('+-x/'.includes(eventValue) && !al_pm)
             entryScreen.textContent += ' ' + eventValue + ' ';
         else
             entryScreen.textContent += eventValue;
 
-        // Recheck on Last Character
-        LastChar = entryScreen.textContent.replaceAll(' ', '').slice(-1);
-        
-        const beforeLastChar = entryScreen.textContent.replaceAll(' ', '').slice(-2, -1);
-        // const br_md = beforeLastChar == '(' && 'x/'.includes(LastChar); //Multiply and Division not Allowed after Bracket
-        
         // Return Error on double operator entry
-        if (("+-x/(".includes(beforeLastChar) && "+-x/".includes(LastChar) && beforeLastChar != '' && LastChar != '') && !al_pm) {
+        if (("+-x/(".includes(LastChar) && "+-x/".includes(eventValue) && LastChar != '') && !al_pm) {
             resultScreen.textContent = 'ERROR';
-        } 
+        } else {
+            if ("+-x/(".includes(eventValue))
+                return
+            else
+                resultScreen.textContent = operate(entryScreen.textContent)
+        }
     }
 
     // Allow to operate only if no symbols are typed
-    if (!"+-x/(".includes(entryScreen.textContent.replaceAll(' ', '').slice(-1)) && eventValue !== "=") {
-        resultScreen.textContent = operate(entryScreen.textContent)
+    // if (!"+-x/(".includes(entryScreen.textContent.replaceAll(' ', '').slice(-1)) && eventValue !== "=") {
+    //     resultScreen.textContent = operate(entryScreen.textContent)
 
-    }
+    // }
+
+    // if (!"+-x/(".includes(eventValue)) {
+    //     resultScreen.textContent = operate(entryScreen.textContent)
+    // }
 
     // Always Scroll Entry to Left
     entryScreen.scrollLeft = entryScreen.scrollWidth - entryScreen.clientHeight
@@ -345,7 +352,7 @@ function hoverOnKeyPress(eventKey, eventType) {
     const btnActive = document.querySelector(`input[data-value~="${eventKey}"`);
 
     const isKeyDown = eventType == "keydown";
-    
+
     switch (eventKey) {
         case 'b':
         case 'Backspace':
@@ -354,7 +361,7 @@ function hoverOnKeyPress(eventKey, eventType) {
         case 'c':
         case 'Delete':
             isKeyDown ? btnActive.classList.add('delete-active') : btnActive.classList.remove('delete-active')
-        
+
         case '=': case 'Enter':
         case '*': case 'x': case '/':
         case '%': case '(': case ')':
@@ -366,7 +373,7 @@ function hoverOnKeyPress(eventKey, eventType) {
         case '5': case '6': case '7': case '8':
         case '9': case '0': case '.':
             isKeyDown ? btnActive.classList.add('number-active') : btnActive.classList.remove('number-active')
-            
+
     }
 
 }
@@ -376,9 +383,9 @@ const Buttons = document.querySelectorAll('input');
 // SECTION Event Listeners 
 // SECTION Mouse
 for (let button of Buttons) {
-    button.addEventListener('click',(e) => {
+    button.addEventListener('click', (e) => {
         eventAction(e.target.value);
-        
+
         checkError()
     });
 }
@@ -415,7 +422,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 document.addEventListener('keyup', (e) => {
-    
+
     hoverOnKeyPress(e.key, e.type)
 });
 // !SECTION
@@ -424,10 +431,10 @@ document.addEventListener('keyup', (e) => {
 
 // SECTION Long Press of Backspace
 let backspace = document.querySelector('input[value="B"]');
-backspace.addEventListener('mousedown', () =>  {
+backspace.addEventListener('mousedown', () => {
     oldTime = new Date
 });
-backspace.addEventListener('mouseup', () =>  {
+backspace.addEventListener('mouseup', () => {
     newTime = new Date
 });
 // !SECTION
