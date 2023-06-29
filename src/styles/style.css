@@ -7,10 +7,10 @@ body {
     box-sizing: border-box;
     font-family: 'Spline Sans Mono', monospace;
 
-    display:flex; 
-    flex-direction:column; 
-    justify-content:center;
-    min-height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
 
     min-width: fit-content;
 
@@ -39,7 +39,7 @@ div[data-section="body"] {
 }
 
 /* SECTION: SCREEN */
-div[data-section="screen"]{
+div[data-section="screen"] {
     width: 270px;
     min-height: auto;
 
@@ -51,7 +51,7 @@ div[data-section="screen"]{
 }
 
 /* RESULT */
-div[data-section="result"]{
+div[data-section="result"] {
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -61,17 +61,21 @@ div[data-section="result"]{
     font-weight: 600;
     font-size: 45px;
     overflow-x: auto;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 
     color: #FFD285;
 }
+
 div[data-section="result"]::-webkit-scrollbar {
-    display: none; /*  Chrome */
+    display: none;
+    /*  Chrome */
 }
 
 /* ENTER */
-div[data-section="entry"]{
+div[data-section="entry"] {
     min-height: 30px;
     height: max-content;
     font-size: 20px;
@@ -79,16 +83,16 @@ div[data-section="entry"]{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    justify-content: flex-end; 
+    justify-content: flex-end;
     overflow-x: auto;
-    
+
     -ms-overflow-style: none;
     scrollbar-width: none;
-    
-    overflow-wrap: break-word;
+
+    /* overflow-wrap: break-word; */
 
     color: #8F5A00;
-    
+
     margin-top: 10px;
 }
 
@@ -132,6 +136,7 @@ input:active {
     background-color: #FFDA99;
     border-radius: 30%;
 }
+
 /* !SECTION */
 
 /* SECTION: Operators */
@@ -144,11 +149,12 @@ input:active {
     color: #14253E;
 }
 
-.symbol-active{
+.symbol-active {
     background-color: #FB8F23;
     color: #14253E;
     border-radius: 30%;
 }
+
 /* !SECTION */
 
 /* SECTION: Delete */
@@ -166,10 +172,11 @@ input:active {
     color: #14253E;
     border-radius: 30%;
 }
+
 /* !SECTION */
 
 /* SECTION: Backspace */
-.backspace{
+.backspace {
     background-color: #D37D4A;
 }
 
@@ -183,6 +190,7 @@ input:active {
     color: #14253E;
     border-radius: 30%;
 }
+
 /* !SECTION */
 
 div[data-section*="col"] {
@@ -201,6 +209,7 @@ div[data-section="symbols"] {
     flex-direction: column;
     gap: 10px;
 }
+
 /* !SECTION */
 
 footer {
